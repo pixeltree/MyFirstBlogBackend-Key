@@ -31,4 +31,19 @@ public class PostsController : ControllerBase {
 
         return post;
     }
+
+    // Post: /posts
+    [HttpPost]
+    public async Task<ActionResult<PostDto>> AddPost(PostDto post)
+    {
+        try
+        {
+            var newPost = await _postService.AddPost(post);
+            string uri = $"/posts/{newPost.Slug}";
+            return Created(uri, newPost);
+        }
+        catch (Exception ex) {
+            return BadRequest(ex.Message);
+        }
+    }
 }
