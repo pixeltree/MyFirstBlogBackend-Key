@@ -17,9 +17,7 @@ public class PostsController : ControllerBase {
     // Get /posts
     [HttpGet]
     public IEnumerable<PostDto> GetPosts() {
-        var posts = _postService.GetPosts().Select(post => post.AsDto());
-        
-        return posts;
+        return _postService.GetPosts();
     }
 
     // Get /posts/:slug
@@ -31,6 +29,6 @@ public class PostsController : ControllerBase {
             return NotFound();
         }
 
-        return post.AsDto();
+        return post;
     }
 }

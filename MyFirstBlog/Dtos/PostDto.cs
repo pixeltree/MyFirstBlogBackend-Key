@@ -5,5 +5,5 @@ public record PostDto {
     public string Title { get; init; } = default!;
     public string Slug { get; init; } = default!;
     public string Body { get; init; } = default!;
-    public DateTimeOffset CreatedDate { get; init; }
+    public DateTime CreatedDate { get; init; }
 }
