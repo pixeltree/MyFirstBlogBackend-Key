@@ -2,11 +2,13 @@ namespace MyFirstBlog.Services;
 
 using MyFirstBlog.Helpers;
 using MyFirstBlog.Entities;
+using System.Text.RegularExpressions;
+using MyFirstBlog.Dtos;
 
 public interface IPostService
 {
-    IEnumerable<Post> GetPosts();
-    Post GetPost(String slug);
+    IEnumerable<PostDto> GetPosts();
+    PostDto GetPost(String slug);
 }
 
 public class PostService : IPostService
@@ -18,20 +20,18 @@ public class PostService : IPostService
         _context = context;
     }
 
-    public IEnumerable<Post> GetPosts()
+    public IEnumerable<PostDto> GetPosts()
     {
-        return _context.Posts;
+        return _context.Posts.Select(post => post.AsDto());
     }
 
-    public Post GetPost(string slug)
+    public PostDto GetPost(string slug)
     {
-        return getPost(slug);
+        return getPost(slug).AsDto();
     }
 
     private Post getPost(string slug)
     {
-        var post = _context.Posts.Where(post => post.Slug == slug).SingleOrDefault();
-        if (post == null) throw new KeyNotFoundException("Post not found");
-        return post;
+        return _context.Posts.Where(a=>a.Slug==slug.ToString()).SingleOrDefault();
     }
 }
