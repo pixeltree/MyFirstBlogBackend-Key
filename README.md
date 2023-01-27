@@ -7,8 +7,8 @@ https://dotnet.microsoft.com/en-us/download
 ``cd MyFirstBlogApi``
 ``cd MyFirstBlog``
 
+2. Set up an SSL certificate by running `dotnet dev-certs https --trust` 
 
-2. Run the following command to run the backend server:
+
+3. Run the following command to run the backend server:
 ``dotnet run``
-
-You should be able to run swagger as well as create an account now
